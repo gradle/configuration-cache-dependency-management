@@ -62,4 +62,20 @@ Compare this with the behavior for Gradle 7.6, where changes to the Ivy reposito
 > gradle76 resolve
 ```
 
+# Not yet implemented
+
 ## Dependency verification
+
+```shell
+> ./gradlew --write-verification-metadata pgp,sha256 resolve
+> ./gradlew resolve
+> rm gradle/verification-metadata.xml
+> ./gradlew resolve
+```
+
+```shell
+> gradle75 --write-verification-metadata pgp,sha256 resolve
+> gradle resolve
+> echo broken > gradle/verification-metadata.xml
+> gradle resolve
+```
