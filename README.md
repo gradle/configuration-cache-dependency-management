@@ -33,7 +33,7 @@ Compare this with the behaviour for Gradle 7.6. The cache miss build should fail
 
 Dynamic dependencies are now supported for Ivy repositories. This was previously only supported for Maven repositories.
 
-To try this out, use the [`resolve`](dynamic-versions/build.gradle.kts) task. This resolves libraries from
+To try this out, use the `resolve` task from the [`dynamic-versions`](dynamic-versions/build.gradle.kts) project. This resolves libraries from
 a Maven and an Ivy repository.
 
 ```shell
@@ -46,7 +46,7 @@ a Maven and an Ivy repository.
 # Cache hit
 > ./gradlew resolve
 
-> ./gradle ivy-lib:publish --no-configuration-cache -DlibVersion=2.0
+> ./gradlew ivy-lib:publish --no-configuration-cache -DlibVersion=2.0
 
 # Cache miss, resolves version 2.0 if the Ivy library
 > ./gradlew resolve
@@ -56,7 +56,7 @@ Compare this with the behavior for Gradle 7.6, where changes to the Ivy reposito
 
 ```shell
 > gradle76 resolve
-> ./gradle ivy-lib:publish --no-configuration-cache -DlibVersion=3.0
+> ./gradlew ivy-lib:publish --no-configuration-cache -DlibVersion=3.0
 
 # Incorrect cache hit, resolves incorrect version
 > gradle76 resolve
