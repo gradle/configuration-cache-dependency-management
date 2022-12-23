@@ -2,6 +2,7 @@ plugins {
     id("java-library")
     id("maven-publish")
     id("ivy-publish")
+    id("signing")
 }
 
 group = "test"
@@ -29,4 +30,10 @@ publishing {
             module = "lib1-ivy"
         }
     }
+}
+
+signing {
+    useGpgCmd()
+    sign(publishing.publications["maven"])
+//    sign(publishing.publications["ivy"])
 }

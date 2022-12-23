@@ -2,6 +2,8 @@
 
 Samples to demonstrate improvements to dependency management support with configuration cache
 
+You will need the `gpg` command installed.
+
 ## Dynamic versions with Ivy and Maven repositories
 
 ```shell
