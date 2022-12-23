@@ -46,6 +46,7 @@ a Maven and an Ivy repository.
 # Cache hit
 > ./gradlew resolve
 
+# Publish version 2.0 of the Ivy library
 > ./gradlew ivy-lib:publish --no-configuration-cache -DlibVersion=2.0
 
 # Cache miss, resolves version 2.0 if the Ivy library
@@ -56,6 +57,8 @@ Compare this with the behavior for Gradle 7.6, where changes to the Ivy reposito
 
 ```shell
 > gradle76 resolve
+
+# Publish version 3.0 of the Ivy library
 > ./gradlew ivy-lib:publish --no-configuration-cache -DlibVersion=3.0
 
 # Incorrect cache hit, resolves incorrect version
