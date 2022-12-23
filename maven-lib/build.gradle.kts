@@ -1,7 +1,6 @@
 plugins {
     id("java-library")
     id("maven-publish")
-    id("ivy-publish")
     id("signing")
 }
 
@@ -16,18 +15,10 @@ publishing {
         maven {
             url = uri("build/repo/maven")
         }
-        ivy {
-            url = uri("build/repo/ivy")
-        }
     }
     publications {
         create("maven", MavenPublication::class.java) {
             from(components["java"])
-            artifactId = "lib1-maven"
-        }
-        create("ivy", IvyPublication::class.java) {
-            from(components["java"])
-            module = "lib1-ivy"
         }
     }
 }
@@ -35,5 +26,4 @@ publishing {
 signing {
     useGpgCmd()
     sign(publishing.publications["maven"])
-//    sign(publishing.publications["ivy"])
 }

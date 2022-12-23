@@ -4,21 +4,23 @@ plugins {
 
 repositories {
     maven {
-        url = uri("../lib1/build/repo/maven")
+        url = uri("../maven-lib/build/repo/maven")
     }
     ivy {
-        url = uri("../lib1/build/repo/ivy")
+        url = uri("../ivy-lib/build/repo/ivy")
     }
 }
 
 dependencies {
-    implementation("test:lib1-maven:+")
-    implementation("test:lib1-ivy:+")
+    implementation("test:maven-lib:+")
+    implementation("test:ivy-lib:+")
 }
 
 tasks.register("resolve") {
     val files: FileCollection = configurations.compileClasspath.get()
     doLast {
-        println("files=${files.files}")
+        for (file in files) {
+            println(file.name)
+        }
     }
 }
