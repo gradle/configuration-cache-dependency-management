@@ -64,6 +64,8 @@ Compare this with the behavior for Gradle 7.6, where changes to the Ivy reposito
 
 # Not yet implemented
 
+## Ivy publishing
+
 ## Dependency verification
 
 ```shell
