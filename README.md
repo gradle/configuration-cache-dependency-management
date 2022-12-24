@@ -70,7 +70,7 @@ The Ivy publishing plugin is now configuration cache compatible.
 
 To try this out, use the `publish` task from the [ivy-lib](ivy-lib/build.gradle.kts) project. This will
 publish a Jar and metadata to `ivy-lib/build/repo/ivy`.
-This project also applies the signing plugin and the signature files are also published
+This project applies the signing plugin and the signature files are also published
 
 ```shell
 > ./gradlew ivy-lib:publish
@@ -128,16 +128,19 @@ be improved later.
 # Fails due to failed verification
 > ./gradlew resolve
 
+# Cleanup
 > rm gradle/verification-metadata.xml
 ```
 
 Compare this with the behaviour for Gradle 7.6. Changes to the verification metadata file are ignored.
 
 ```shell
+# Reset state
+> ./gradlew clean publish
 > gradle76 --write-verification-metadata pgp,sha256 resolve
 > gradle76 resolve
 > gradle76 breakVerificationMetadata
-# Should fail but does not
+# Should fail but does not as changes to verification metadata file are ignored
 > gradle76 resolve
 > rm gradle/verification-metadata.xml
 ```
@@ -154,17 +157,17 @@ The `dependency` and `dependencyInsight` tasks are configuration cache compatibl
 > ./gradlew dynamic-versions:dependencies --configuration compileClasspath
 > ./gradlew dynamic-versions:dependencies --configuration compileClasspath
 
-# Publish new versions
+# Publish new version
 > ./gradlew publish -DlibVersion=2.0
 
-# Cache miss (because of dynamic versions), reports on new versions
+# Cache miss (because of new version), reports on new version
 > ./gradlew dynamic-versions:dependencies --configuration compileClasspath
 
 # `dependencyInsight` report
 > ./gradlew dynamic-versions:dependencyInsight --configuration compileClasspath --dependency maven-lib
 > ./gradlew dynamic-versions:dependencyInsight --configuration compileClasspath --dependency maven-lib
 
-# Publish new versions
+# Publish new version
 > ./gradlew publish -DlibVersion=3.0
 
 # Cache miss, reports on new versions
