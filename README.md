@@ -147,13 +147,26 @@ Compare this with the behaviour for Gradle 7.6. Changes to the verification meta
 The `dependency` and `dependencyInsight` tasks are configuration cache compatible.
 
 ```shell
+# Reset state
 > ./gradlew clean publish
+
+# `dependencies` report
 > ./gradlew dynamic-versions:dependencies --configuration compileClasspath
 > ./gradlew dynamic-versions:dependencies --configuration compileClasspath
+
+# Publish new versions
 > ./gradlew publish -DlibVersion=2.0
+
+# Cache miss (because of dynamic versions), reports on new versions
 > ./gradlew dynamic-versions:dependencies --configuration compileClasspath
+
+# `dependencyInsight` report
 > ./gradlew dynamic-versions:dependencyInsight --configuration compileClasspath --dependency maven-lib
 > ./gradlew dynamic-versions:dependencyInsight --configuration compileClasspath --dependency maven-lib
+
+# Publish new versions
 > ./gradlew publish -DlibVersion=3.0
+
+# Cache miss, reports on new versions
 > ./gradlew dynamic-versions:dependencyInsight --configuration compileClasspath --dependency maven-lib
 ```
