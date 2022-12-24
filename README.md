@@ -72,15 +72,23 @@ Compare this with the behavior for Gradle 7.6, where changes to the Ivy reposito
 ## Dependency verification
 
 ```shell
+> ./gradlew clean && ./gradlew publish --no-configuration-cache
 > ./gradlew --write-verification-metadata pgp,sha256 resolve
+# Currently this is a cache miss
 > ./gradlew resolve
-> rm gradle/verification-metadata.xml
+> ./gradlew resolve
+> ./gradlew breakVerificationMetadata
+# Fails due to failed verification
+> ./gradlew resolve
+> ./gradlew fixVerificationMetadata
+> ./gradlew resolve
 > ./gradlew resolve
 ```
 
 ```shell
-> gradle75 --write-verification-metadata pgp,sha256 resolve
-> gradle resolve
-> echo broken > gradle/verification-metadata.xml
-> gradle resolve
+> gradle76 --write-verification-metadata pgp,sha256 resolve
+> gradle76 resolve
+> gradle76 breakVerificationMetadata
+# Should fail but does not
+> gradle76 resolve
 ```
